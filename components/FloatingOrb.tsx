@@ -1,9 +1,10 @@
+import { JSX } from "react";
 import { StyleSheet, View } from "react-native";
 
 
-export const FloatingOrb = ({ style }: { style?: object }) => (
+export const FloatingOrb = ({ style }: { style?: object }): JSX.Element => (
     <View style={[styles.orb, style]} />
-  );
+);
 
   const styles = StyleSheet.create({
   orb: {

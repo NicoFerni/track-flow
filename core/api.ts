@@ -12,14 +12,14 @@ export async function addJob(job: Omit<Job, 'id' | 'created_at'>) {
   return data?.[0]
 }
 
-export async function getJobs() {
+export async function getJobs(): Promise<Job[]> {
   const { data, error } = await supabase
     .from('Job')
     .select('*')
     .order('created_at', { ascending: false })
 
   if (error) throw error
-  return data
+  return data as Job[]
 }
 
 export async function updateJob(id: number, updates: Partial<Job>) {

@@ -3,32 +3,16 @@ import { useEffect, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Animated, {
     FadeInUp,
-    LinearTransition,
     useAnimatedStyle,
     useSharedValue,
     withDelay,
     withTiming
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import JobCard from '../components/Card';
+import { AnimatedCard } from '../components/AnimatedCard';
 import { getJobs } from '../core/api';
 import { Job } from '../core/interfaces';
 
-const AnimatedJobCard = ({ item, index }: { item: Job; index: number }) => {
-    return (
-        <Animated.View
-            entering={FadeInUp.delay(index * 100).duration(600).springify()}
-            layout={LinearTransition.springify()}
-        >
-            <JobCard 
-                title={item.title} 
-                company={item.company} 
-                status={item.status} 
-                interviewType={item.interview_type} 
-            />
-        </Animated.View>
-    );
-};
 
 export default function Home() {
     const [jobs, setJobs] = useState<Job[]>([]);
@@ -87,7 +71,7 @@ export default function Home() {
     }));
 
     const renderItem = ({ item, index }: { item: Job; index: number }) => (
-        <AnimatedJobCard item={item} index={index} />
+        <AnimatedCard item={item} index={index} />
     );
 
     return (
@@ -130,7 +114,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#fff'
     },
     title: {
         fontSize: 24,

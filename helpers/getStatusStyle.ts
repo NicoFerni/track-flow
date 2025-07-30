@@ -1,4 +1,7 @@
-export default function getStatusStyle(status: string) {
+import { ViewStyle } from "react-native";
+
+
+export default function getStatusStyle(status: string): ViewStyle {
   switch (status) {
     case 'Applied':
       return { backgroundColor: '#007bff' };

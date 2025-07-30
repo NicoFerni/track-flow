@@ -1,4 +1,6 @@
-export default function getInterviewStyle(interview: string) {
+import { ViewStyle } from 'react-native';
+
+export default function getInterviewStyle(interview: string): ViewStyle {
   switch (interview) {
     case 'Behavioral':
       return { backgroundColor: '#4dc9c9ff' };
