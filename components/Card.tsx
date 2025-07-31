@@ -1,29 +1,47 @@
-import { JSX } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { JobDTO } from '../core/interfaces';
 import getInterviewStyle from '../helpers/getInterviewStyle';
 import getStatusStyle from '../helpers/getStatusStyle';
 
-export default function Card({ title, company, status, interviewType }: JobDTO): JSX.Element {
+export default function Card({ title, company, status, interviewType }: JobDTO) {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
-    <View style={styles.card}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.company}>{company}</Text>
-      <View style={styles.tagContainer}>
-        <View style={[styles.statusTag, getStatusStyle(status)]}>
-          <Text style={styles.statusText}>{status}</Text>
+    <>
+      <Pressable onPress={() => setModalVisible(true)}>
+        <View style={styles.card}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.company}>{company}</Text>
+          <View style={styles.tagContainer}>
+            <View style={[styles.statusTag, getStatusStyle(status)]}>
+              <Text style={styles.statusText}>{status}</Text>
+            </View>
+
+            <View style={[styles.statusTag, getInterviewStyle(interviewType)]}>
+              <Text style={styles.statusText}>{interviewType}</Text>
+            </View>
+          </View>
         </View>
+      </Pressable>
 
-        <View style={[styles.statusTag, getInterviewStyle(interviewType)]}>
-          <Text style={styles.statusText}>{interviewType}</Text>
+      <Modal
+        visible={modalVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Pressable onPress={() => setModalVisible(false)}>
+              <Text style={styles.close}>{interviewType}</Text>
+            </Pressable>
+          </View>
         </View>
-
-      </View>
-
-    </View>
+      </Modal>
+    </>
   );
 }
-
 
 const styles = StyleSheet.create({
   card: {
@@ -63,5 +81,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     marginLeft: 5
+  },
+    modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: 24,
+    width: '90%',
+    maxHeight: '80%',
+  },
+  close: {
+    marginTop: 16,
+    textAlign: 'center',
+    color: '#007AFF',
+    fontWeight: 'bold',
   }
 });

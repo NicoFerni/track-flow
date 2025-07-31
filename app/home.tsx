@@ -84,15 +84,17 @@ export default function Home() {
                 data={jobs}
                 keyExtractor={(item) => item.id.toString()}
                 refreshControl={
-                    <RefreshControl 
-                        refreshing={refreshing} 
+                    <RefreshControl
+                        refreshing={refreshing}
                         onRefresh={handleRefresh}
                     />
                 }
                 ListEmptyComponent={
-                    <Animated.View entering={FadeInUp.delay(200).duration(600)}>
-                        <Text style={styles.empty}>No jobs yet</Text>
-                    </Animated.View>
+                    !isLoading ? (
+                        <Animated.View entering={FadeInUp.delay(200).duration(600)}>
+                            <Text style={styles.empty}>No jobs yet</Text>
+                        </Animated.View>
+                    ) : null
                 }
                 renderItem={renderItem}
                 showsVerticalScrollIndicator={false}
