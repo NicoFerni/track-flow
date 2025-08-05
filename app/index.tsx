@@ -1,6 +1,6 @@
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 import {
   Animated,
   Dimensions,
@@ -9,12 +9,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FloatingOrb } from '../components/FloatingOrb';
+import { FloatingOrb } from "../components/FloatingOrb";
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
 export default function Index() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -49,12 +49,15 @@ export default function Index() {
     ]).start();
   }, [buttonAnim, fadeAnim, scaleAnim, slideAnim]);
 
-
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent
+      />
       <LinearGradient
-        colors={['#667eea', '#764ba2', '#f093fb']}
+        colors={["#667eea", "#764ba2", "#f093fb"]}
         style={styles.gradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -63,25 +66,21 @@ export default function Index() {
           <FloatingOrb style={styles.orb1} />
           <FloatingOrb style={styles.orb2} />
           <FloatingOrb style={styles.orb3} />
-          
-          <Animated.View 
+
+          <Animated.View
             style={[
               styles.contentContainer,
               {
                 opacity: fadeAnim,
-                transform: [
-                  { translateY: slideAnim },
-                  { scale: scaleAnim }
-                ]
-              }
+                transform: [{ translateY: slideAnim }, { scale: scaleAnim }],
+              },
             ]}
           >
-            <View style={styles.logoContainer}>
-                <Image style={styles.logo} source={require('../assets/images/logo.png')} />
-            </View>
-
             <Text style={styles.welcomeText}>Welcome To</Text>
-            <Text style={styles.appName}>TrackFlow</Text>
+            <Image
+              style={styles.logo}
+              source={require("../assets/images/logo.png")}
+            />
             <Text style={styles.subtitle}>
               The best way to organize your applications
             </Text>
@@ -102,13 +101,13 @@ export default function Index() {
             </View>
           </Animated.View>
 
-          <Animated.View 
+          <Animated.View
             style={[
               styles.buttonContainer,
               {
                 opacity: buttonAnim,
-                transform: [{ scale: buttonAnim }]
-              }
+                transform: [{ scale: buttonAnim }],
+              },
             ]}
           >
             <Link href="/home" asChild>
@@ -132,115 +131,108 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 30,
     paddingVertical: 50,
   },
   contentContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   logoContainer: {
     marginBottom: 40,
   },
   logo: {
-    width: 80,
-    height: 80,
+    width: 200,
+    height: 200,
     borderRadius: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: 'rgba(255,255,255,0.3)',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
-    elevation: 10,
+    backgroundColor: "transparent",
+    justifyContent: "center",
+    alignItems: "center",
   },
   logoText: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#fff',
+    fontWeight: "bold",
+    color: "#fff",
   },
   welcomeText: {
     fontSize: 18,
-    color: 'rgba(255,255,255,0.8)',
+    color: "rgba(255,255,255,0.8)",
     marginBottom: 5,
-    fontWeight: '300',
+    fontWeight: "300",
   },
   appName: {
     fontSize: 42,
-    fontWeight: 'bold',
-    color: '#fff',
+    fontWeight: "bold",
+    color: "#fff",
     marginBottom: 15,
-    textAlign: 'center',
-    textShadowColor: 'rgba(0,0,0,0.3)',
+    textAlign: "center",
+    textShadowColor: "rgba(0,0,0,0.3)",
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 10,
   },
   subtitle: {
     fontSize: 16,
-    color: 'rgba(255,255,255,0.9)',
-    textAlign: 'center',
+    color: "rgba(255,255,255,0.9)",
+    textAlign: "center",
     lineHeight: 24,
     marginBottom: 40,
     paddingHorizontal: 20,
   },
   featuresContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     gap: 15,
   },
   featureItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 12,
   },
   featureDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: 'rgba(255,255,255,0.8)',
+    backgroundColor: "rgba(255,255,255,0.8)",
   },
   featureText: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.9)',
-    fontWeight: '500',
+    color: "rgba(255,255,255,0.9)",
+    fontWeight: "500",
   },
   buttonContainer: {
-    width: '100%',
+    width: "100%",
   },
   startButton: {
     borderRadius: 25,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: "rgba(255,255,255,0.2)",
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.3)',
-    overflow: 'hidden',
-    shadowColor: '#000',
+    borderColor: "rgba(255,255,255,0.3)",
+    overflow: "hidden",
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.3,
     shadowRadius: 20,
     elevation: 10,
   },
   buttonContent: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     paddingVertical: 18,
     paddingHorizontal: 40,
     gap: 10,
   },
   buttonText: {
     fontSize: 18,
-    fontWeight: '600',
-    color: '#fff',
+    fontWeight: "600",
+    color: "#fff",
   },
   buttonArrow: {
     fontSize: 18,
-    color: '#fff',
-    fontWeight: 'bold',
+    color: "#fff",
+    fontWeight: "bold",
   },
   orb1: {
     width: 120,
@@ -260,5 +252,4 @@ const styles = StyleSheet.create({
     bottom: height * 0.2,
     left: width * 0.1,
   },
-
 });

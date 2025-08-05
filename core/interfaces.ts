@@ -4,10 +4,16 @@ export interface Job{
     id: number
     title: string
     company: string
-    interview_type: InterviewType
+    interviewType: InterviewType
     status: Status
     created_at?: Timestamp
     date?: Date
+    applicationDate: Date,
+    salary: string,
+    location: string,
+    description: string,
+    requirements: string,
+    notes: string,
 }
 
 export type InterviewType = 'Screening' | 'Behavioral' | 'Live coding' | 'Takehome'
@@ -19,13 +25,19 @@ export interface JobDTO{
     company: string
     interviewType: InterviewType
     status: Status
+    applicationDate: Date,
+    salary: string,
+    location: string,
+    description: string,
+    requirements: string,
+    notes: string,
 }
 
 export interface JobFormData {
     title: string;
     company: string;
     status: Status;
-    interview_type: InterviewType;
+    interviewType: InterviewType;
 }
 
 export interface JobFormProps {
@@ -33,3 +45,8 @@ export interface JobFormProps {
     onValidationError: (message: string) => void;
     isLoading?: boolean;
 }
+
+export interface DetailRowProps {
+  label: string;
+  value: string | number | null | undefined;
+};

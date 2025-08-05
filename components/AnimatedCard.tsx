@@ -1,9 +1,9 @@
 import { JSX } from "react";
 import Animated, { FadeInUp, LinearTransition } from "react-native-reanimated";
-import { Job } from "../core/interfaces";
+import { JobDTO } from "../core/interfaces";
 import Card from "./Card";
 
-export const AnimatedCard = ({ item, index }: { item: Job; index: number }): JSX.Element => {
+export const AnimatedCard = ({ item, index }: { item: JobDTO; index: number }): JSX.Element => {
     return (
         <Animated.View
             entering={FadeInUp.delay(index * 100).duration(600).springify()}
@@ -13,7 +13,13 @@ export const AnimatedCard = ({ item, index }: { item: Job; index: number }): JSX
                 title={item.title} 
                 company={item.company} 
                 status={item.status} 
-                interviewType={item.interview_type} 
+                interviewType={item.interviewType} 
+                applicationDate={item.applicationDate}
+                salary={item.salary}
+                location={item.location}
+                description={item.description}
+                requirements={item.requirements}
+                notes={item.notes}
             />
         </Animated.View>
     );

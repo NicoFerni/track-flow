@@ -8,7 +8,7 @@ export default function JobForm({ onSubmit, onValidationError, isLoading = false
     const [title, setTitle] = useState('');
     const [company, setCompany] = useState('');
     const [status, setStatus] = useState<Status | 'none'>('none');
-    const [interview_type, setInterviewType] = useState<InterviewType | 'none'>('none');
+    const [interviewType, setInterviewType] = useState<InterviewType | 'none'>('none');
 
     const handleSubmit = () => {
         if (!title.trim()) {
@@ -26,7 +26,7 @@ export default function JobForm({ onSubmit, onValidationError, isLoading = false
             return;
         }
         
-        if (interview_type === 'none') {
+        if (interviewType === 'none') {
             onValidationError('Please select an interview type');
             return;
         }
@@ -35,7 +35,7 @@ export default function JobForm({ onSubmit, onValidationError, isLoading = false
             title: title.trim(),
             company: company.trim(),
             status: status as Status,
-            interview_type: interview_type as InterviewType
+            interviewType: interviewType as InterviewType
         });
     };
 
@@ -80,7 +80,7 @@ export default function JobForm({ onSubmit, onValidationError, isLoading = false
             
             <View style={styles.inputPicker}>
                 <Picker
-                    selectedValue={interview_type}
+                    selectedValue={interviewType}
                     onValueChange={(itemValue) => setInterviewType(itemValue as InterviewType)}
                     enabled={!isLoading}
                 >

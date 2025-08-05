@@ -4,6 +4,7 @@ import { Alert, StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import JobForm from '../components/AddJobForm';
 import { addJob } from '../core/api';
+import { InterviewType, Status } from '../core/interfaces';
 
 export default function AddJob() {
     const router = useRouter();
@@ -12,13 +13,31 @@ export default function AddJob() {
     const handleJobSubmit = async (jobData: {
         title: string;
         company: string;
-        status: any;
-        interview_type: any;
+        status: Status;
+        interviewType: InterviewType;
+        applicationDate?: Date;
+        salary?: string;
+        location?: string;
+        description?: string;
+        notes?: string;
+        requirements?: string,
+        [key: string]: any;
     }) => {
         setIsLoading(true);
-        
+
         try {
-            await addJob(jobData);
+            await addJob({
+                title: jobData.title,
+                company: jobData.company,
+                status: jobData.status,
+                interviewType: jobData.interviewType,
+                applicationDate: jobData.applicationDate || new Date(),
+                salary: jobData.salary ?? '',
+                location: jobData.location ?? '',
+                description: jobData.description ?? '',
+                notes: jobData.notes ?? '',
+                requirements: jobData.requirements ?? '',
+            });
             router.replace('/home');
         } catch (error: any) {
             Alert.alert('Error', error.message || 'Failed to add job');
